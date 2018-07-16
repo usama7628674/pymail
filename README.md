@@ -8,3 +8,5 @@ python email_send.py
 ```
 
 * **You can send an email with or without attachment**
+
+* **You must enable less secure apps to send an email**
