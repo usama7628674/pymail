@@ -82,6 +82,7 @@ text = msg.as_string()
  
 # sending the mail
 s.sendmail(user, to, text)
+print 'Email sent'
  
 
 s.quit()
