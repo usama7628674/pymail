@@ -12,3 +12,5 @@ python email_send.py
 * **You can send as many emails as you want**
 
 * **You must enable less secure apps to send an email**
+
+* **The attachment must resides in attachments folder**
