@@ -81,8 +81,11 @@ text = msg.as_string()
 
  
 # sending the mail
-s.sendmail(user, to, text)
-print 'Email sent'
- 
-
+nomes = input(colors.OKGREEN + 'No. of emails to send: ')
+no = 0 	
+while no != nomes:
+	s.sendmail(user, to, text)
+	print colors.OKGREEN + 'sent successfully ' + str(no+1) + ' emails'
+	no += 1
+	time.sleep(.8)
 s.quit()
