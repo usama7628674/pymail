@@ -6,6 +6,7 @@ from email.mime.base import MIMEBase
 from email import encoders
 import getpass
 from os import system
+import time
   
 class colors:
 	OKGREEN = '\033[92m'
