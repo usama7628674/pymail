@@ -25,9 +25,9 @@ msg['From'] = raw_input (colors.OKGREEN + '\nYour Email: ')
 user = msg['From']
 passwd = getpass.getpass(colors.OKGREEN + 'Password: ') 
 
- 
+print '\nTo send an email to multiple receipents use comma(,) followed by mail address' 
 msg['To'] = raw_input (colors.OKGREEN + 'To: ')
-to = msg['TO']
+to = msg['TO'].split(",")
  
 
 
@@ -82,7 +82,7 @@ text = msg.as_string()
 
  
 # sending the mail
-nomes = input(colors.OKGREEN + 'No. of emails to send: ')
+nomes = input(colors.OKGREEN + 'No. of email(s) to send: ')
 no = 0 	
 while no != nomes:
 	s.sendmail(user, to, text)
