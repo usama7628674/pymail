@@ -15,4 +15,4 @@ python email_send.py
 
 * **You must enable less secure apps to send an email**
 
-* **The attachment must resides in attachments folder**
+* **The attachment must be in attachments folder**
