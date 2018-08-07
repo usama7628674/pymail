@@ -5,7 +5,6 @@ from email.mime.text import MIMEText
 from email.mime.base import MIMEBase
 from email import encoders
 import getpass
-import system
 import time
 import sys
 import os
@@ -19,7 +18,7 @@ class colors:
 if platform.system() == 'Windows':
     os.system('cls')
 else:
-    system('clear')
+    os.system('clear')
 
 
 
@@ -30,8 +29,6 @@ print colors.BLUE + 'To send an email you must have less secure apps enabled in 
 
 msg['From'] = raw_input (colors.OKGREEN + '\nYour Email: ')
 
-user = msg['From']
-
 passwd = getpass.getpass(colors.OKGREEN + 'Password: ')
 
 print colors.BLUE + '\nTo send an email to multiple receipents use comma(,) followed by mail address'
@@ -40,12 +37,12 @@ msg['To'] = raw_input (colors.OKGREEN + '\nTo: ')
 
 to = msg['TO'].split(",")
 
-subject = raw_input (colors.OKGREEN + 'Subject: ')
+msg['subject'] = raw_input (colors.OKGREEN + 'Subject: ')
 
 
 body = raw_input (colors.OKGREEN + 'Message: ')
 
-message = 'From: ' + user + '\nSubject: ' + subject + '\n' + body
+message = msg['subject'] + '\n' + body
 
 msg.attach(MIMEText(message, 'plain'))
 
@@ -73,14 +70,14 @@ s = smtplib.SMTP('smtp.gmail.com', 587)
 
 s.starttls()
 
-s.login(user, passwd)
+s.login(msg['From'], passwd)
 
 text = msg.as_string()
 
 nomes = input(colors.OKGREEN + 'No. of email(s) to send: ')
 no = 0
 while no != nomes:
-	s.sendmail(user, to, text)
+	s.sendmail(msg['From'], to, text)
 	print colors.BLUE + 'successfully sent ' + str(no+1) + ' emails'
 	no += 1
 	time.sleep(.8)
@@ -92,4 +89,4 @@ if platform.system() == 'Windows':
     else:
         pass
 else:
-    system('rm attachment 2> /dev/null')
+    os.system('rm attachment.zip 2> /dev/null')
