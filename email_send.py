@@ -11,7 +11,7 @@ import os
 import platform
 
 class colors:
-	OKGREEN = '\033[92m'
+        OKGREEN = '\033[92m'
         BLUE = '\033[94m'
 
 
@@ -24,46 +24,43 @@ else:
 
 msg = MIMEMultipart()
 
-print colors.BLUE + 'To send an email you must have less secure apps enabled in your account \nhttps://myaccount.google.com/lesssecureapps'
+print(colors.BLUE + 'To send an email you must have less secure apps enabled in your account \nhttps://myaccount.google.com/lesssecureapps')
 
 
-msg['From'] = raw_input (colors.OKGREEN + '\nYour Email: ')
+msg['From'] = input (colors.OKGREEN + '\nYour Email: ')
 
 passwd = getpass.getpass(colors.OKGREEN + 'Password: ')
 
-print colors.BLUE + '\nTo send an email to multiple receipents use comma(,) followed by mail address'
+print(colors.BLUE + '\nTo send an email to multiple receipents use comma(,) followed by mail address')
 
-msg['To'] = raw_input (colors.OKGREEN + '\nTo: ')
+msg['To'] = input (colors.OKGREEN + '\nTo: ')
 
 to = msg['TO'].split(",")
 
-msg['subject'] = raw_input (colors.OKGREEN + 'Subject: ')
+msg['subject'] = input (colors.OKGREEN + 'Subject: ')
 
 
-body = raw_input (colors.OKGREEN + 'Message: ')
+body = input (colors.OKGREEN + 'Message: ')
 
-message = msg['subject'] + '\n' + body
 
-msg.attach(MIMEText(message, 'plain'))
+msg.attach(MIMEText(body, 'plain'))
 
-check = raw_input (colors.OKGREEN + "Do you want to attach files [y/n] ")
+check = input (colors.OKGREEN + "Do you want to attach files [y/n] ")
 if check == 'y':
-
-
-		os.system('python -m zipfile -c attachment.zip attachments')
-		attachment = open('attachment.zip', "rb")
-                p = MIMEBase('application', 'zip')
-                p.set_payload((attachment).read())
-                encoders.encode_base64(p)
-                p.add_header('Content-Disposition', "attachment; filename= attachment.zip")
- 		msg.attach(p)
-                attachment.close()
+    os.system('python -m zipfile -c attachment.zip attachments')
+    attachment = open('attachment.zip', "rb")
+    p = MIMEBase('application', 'zip')
+    p.set_payload((attachment).read())
+    encoders.encode_base64(p)
+    p.add_header('Content-Disposition', "attachment; filename= attachment.zip")
+    msg.attach(p)
+    attachment.close()
 
 elif check == 'n':
 
-		print 'This email will be sent without any attachment'
+		print('This email will be sent without any attachment')
 else:
-	print 'Wrong selection'
+	print('Wrong selection')
 	sys.exit()
 
 s = smtplib.SMTP('smtp.gmail.com', 587)
@@ -78,7 +75,7 @@ nomes = input(colors.OKGREEN + 'No. of email(s) to send: ')
 no = 0
 while no != nomes:
 	s.sendmail(msg['From'], to, text)
-	print colors.BLUE + 'successfully sent ' + str(no+1) + ' emails'
+	print(colors.BLUE + 'successfully sent ' + str(no+1) + ' emails')
 	no += 1
 	time.sleep(.8)
 s.close()
