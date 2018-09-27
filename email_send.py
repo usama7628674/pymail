@@ -45,23 +45,24 @@ body = input (colors.OKGREEN + 'Message: ')
 
 msg.attach(MIMEText(body, 'plain'))
 
-check = input (colors.OKGREEN + "Do you want to attach files [y/n] ")
-if check == 'y':
-    os.system('python -m zipfile -c attachment.zip attachments')
-    attachment = open('attachment.zip', "rb")
-    p = MIMEBase('application', 'zip')
-    p.set_payload((attachment).read())
-    encoders.encode_base64(p)
-    p.add_header('Content-Disposition', "attachment; filename= attachment.zip")
-    msg.attach(p)
-    attachment.close()
+def check_attach():
+    check = input (colors.OKGREEN + "Do you want to attach files [y/n] ")
+    if check == 'y':
+        os.system('python -m zipfile -c attachment.zip attachments')
+        attachment = open('attachment.zip', "rb")
+        p = MIMEBase('application', 'zip')
+        p.set_payload((attachment).read())
+        encoders.encode_base64(p)
+        p.add_header('Content-Disposition', "attachment; filename= attachment.zip")
+        msg.attach(p)
+        attachment.close()
 
-elif check == 'n':
-
-		print('This email will be sent without any attachment')
-else:
-	print('Wrong selection')
-	sys.exit()
+    elif check == 'n':
+        print('This email will be sent without any attachment')
+    else:
+	       print('Wrong selection')
+	       check_attach()
+check_attach()
 
 s = smtplib.SMTP('smtp.gmail.com', 587)
 
@@ -71,8 +72,9 @@ s.login(msg['From'], passwd)
 
 text = msg.as_string()
 
-nomes = input(colors.OKGREEN + 'No. of email(s) to send: ')
+nomes = int(input(colors.OKGREEN + 'No. of email(s) to send: '))
 no = 0
+
 while no != nomes:
 	s.sendmail(msg['From'], to, text)
 	print(colors.BLUE + 'successfully sent ' + str(no+1) + ' emails')
