@@ -6,7 +6,7 @@
 ```
 git clone https://github.com/usama7628674/Email_with_attachment.git
 cd Email_with_attachment
-python email_send.py
+python3 email_send.py
 ```
 
 * **You can send an email with or without attachment**
