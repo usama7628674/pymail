@@ -20,7 +20,10 @@ if platform.system() == 'Windows':
 else:
     os.system('clear')
 
-
+if os.path.exists('attachments/gitkeep'):
+    os.remove('attachments/gitkeep')
+else:
+    pass
 
 msg = MIMEMultipart()
 
